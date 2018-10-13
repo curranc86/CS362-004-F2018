@@ -670,6 +670,28 @@ void cardEffect_adventurer(struct gameState *state, int currentPlayer) {
 		z = z - 1;
 	}
 }
+void cardEffect_council_room(struct gameState *state, int currentPlayer, int handPos) {
+	//+4 Cards
+	for (int i = 0; i < 4; i++)
+	{
+		drawCard(currentPlayer, state);
+	}
+
+	//+1 Buy
+	state->numBuys++;
+
+	//Each other player draws a card
+	for (int i = 0; i < state->numPlayers; i++)
+	{
+		if (i != currentPlayer)
+		{
+			drawCard(i, state);
+		}
+	}
+
+	//put played card in played card pile
+	discardCard(handPos, currentPlayer, state, 0);
+}
 
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
 {
@@ -696,27 +718,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 		return 0;
 
 	case council_room:
-		//+4 Cards
-		for (i = 0; i < 4; i++)
-		{
-			drawCard(currentPlayer, state);
-		}
-
-		//+1 Buy
-		state->numBuys++;
-
-		//Each other player draws a card
-		for (i = 0; i < state->numPlayers; i++)
-		{
-			if (i != currentPlayer)
-			{
-				drawCard(i, state);
-			}
-		}
-
-		//put played card in played card pile
-		discardCard(handPos, currentPlayer, state, 0);
-
+		cardEffect_council_room(state, currentPlayer, handPos);
 		return 0;
 
 	case feast:
