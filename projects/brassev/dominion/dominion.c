@@ -665,8 +665,8 @@ void cardEffect_adventurer(struct gameState *state, int currentPlayer) {
 			z++;
 		}
 	}
-	while (z - 1 >= 0) {
-		state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z - 1]; // discard all cards in play that have been drawn
+	while (z >= 0) {
+		state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z]; // discard all cards in play that have been drawn
 		z = z - 1;
 	}
 }
@@ -694,7 +694,7 @@ void cardEffect_council_room(struct gameState *state, int currentPlayer, int han
 }
 
 void cardEffect_feast(struct gameState *state, int currentPlayer, int choice1) {
-	int temphand[MAX_HAND];// moved above the if statement
+	int *temphand = (int*)malloc(sizeof(int) * state->handCount[currentPlayer]);// moved above the if statement
 	//gain card with cost up to 5
 		//Backup hand
 	for (int i = 0; i <= state->handCount[currentPlayer]; i++) {
@@ -729,7 +729,6 @@ void cardEffect_feast(struct gameState *state, int currentPlayer, int choice1) {
 			}
 
 			gainCard(choice1, state, 0, currentPlayer);//Gain the card
-			x = 0;//No more buying cards
 
 			if (DEBUG) {
 				printf("Deck Count: %d\n", state->handCount[currentPlayer] + state->deckCount[currentPlayer] + state->discardCount[currentPlayer]);
@@ -754,7 +753,7 @@ int cardEffect_mine(struct gameState *state, int currentPlayer, int choice1, int
 		return -1;
 	}
 
-	if (choice2 > treasure_map || choice2 < curse)
+	if (choice2 > treasure_map && choice2 < curse)
 	{
 		return -1;
 	}
@@ -785,7 +784,7 @@ void cardEffect_smithy(struct gameState* state, int currentPlayer, int handPos) 
 	//+3 Cards
 	for (int i = 0; i < 3; i++)
 	{
-		drawCard(currentPlayer, state);
+		drawCard(handPos, state);
 	}
 
 	//discard card from hand
