@@ -1,0 +1,41 @@
+        -:    0:Source:unittest2.c
+        -:    0:Graph:unittest2.gcno
+        -:    0:Data:unittest2.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:/*************************************************************************************
+        -:    2: * CS362 Assignment 3
+        -:    3: * Name: Christina Curran
+        -:    4: * File: unittest2.c
+        -:    5: * **********************************************************************************/
+        -:    6:
+        -:    7:#include "dominion.h"
+        -:    8:#include "dominion_helpers.h"
+        -:    9:#include "rngs.h"
+        -:   10:#include <string.h>
+        -:   11:#include <stdio.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:#include <math.h>
+        -:   15:
+        -:   16://Unit testing: isGameOver
+        2:   17:void main (int argc, char** argv){
+        -:   18:
+        -:   19:	struct gameState gm;
+        2:   20:	int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
+        -:   21:		     sea_hag, tribute, smithy};
+        2:   22:	int numPlayers = 2;
+        -:   23:
+        -:   24:	//initialize game to have something for turns to be checked on
+        2:   25:	int game = initializeGame(numPlayers, k, 3, &gm);
+        -:   26:	
+        2:   27:	printf("\n**Unit Test 2: isGameOver**\n");
+        -:   28:
+        2:   29:	printf("Is the player's turn over?\n");
+        2:   30:	int i = isGameOver(&gm);
+        2:   31:	if (i == 0){
+        2:   32:		printf("PASS: turn is over, but not game\n");
+        -:   33:	}
+        -:   34:	
+        2:   35:	printf("**Unit Test 2: isGameOver complete**\n\n");
+        2:   36:}

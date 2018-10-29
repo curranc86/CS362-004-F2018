@@ -1,0 +1,11 @@
+unittest1.c:
+
+**Unit Test 1: buyCard**
+T1: Insufficient coins to buy card
+PASS: unable to buy card
+T2: Sufficient coins to buy card
+FAIL
+T3: Sufficient coins to buy card but no buys left
+PASS: unable to buy card; no more buys
+**Unit Test 1: buyCard complete**
+

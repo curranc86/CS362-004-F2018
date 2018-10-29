@@ -1,0 +1,48 @@
+        -:    0:Source:unittest3.c
+        -:    0:Graph:unittest3.gcno
+        -:    0:Data:unittest3.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:/*************************************************************************************
+        -:    2: * CS362 Assignment 3
+        -:    3: * Name: Christina Curran
+        -:    4: * File: unittest1.c
+        -:    5: * **********************************************************************************/
+        -:    6:
+        -:    7:#include "dominion.h"
+        -:    8:#include "dominion_helpers.h"
+        -:    9:#include "rngs.h"
+        -:   10:#include <string.h>
+        -:   11:#include <stdio.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:#include <math.h>
+        -:   15:
+        -:   16://Unit testing: whoseTurn
+        2:   17:void main (int argc, char** argv){
+        -:   18:
+        -:   19:	struct gameState gm1;
+        -:   20:	struct gameState gm2;
+        2:   21:	gm1.whoseTurn = 1;
+        2:   22:	gm2.whoseTurn = 2;
+        -:   23:	
+        2:   24:	printf("\n**Unit Test 3: whoseTurn**\n");
+        -:   25:
+        -:   26:	//check player 1
+        2:   27:	if(whoseTurn(&gm1) == 1){
+        2:   28:		printf("Player 1: PASS\n");
+        -:   29:	}
+        -:   30:	else{
+    #####:   31:		printf("Player 1: FAIL\n");
+        -:   32:	}
+        -:   33:
+        -:   34:	//check player 2
+        2:   35:	if(whoseTurn(&gm2) == 2){
+        2:   36:		printf("Player 2: PASS\n");
+        -:   37:	}
+        -:   38:	else{
+    #####:   39:		printf("Player 2: FAIL\n");
+        -:   40:	}
+        2:   41:	printf("**Unit Test 3: whoseTurn complete**\n\n");
+        -:   42:	
+        2:   43:}

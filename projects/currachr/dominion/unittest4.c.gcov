@@ -1,0 +1,85 @@
+        -:    0:Source:unittest4.c
+        -:    0:Graph:unittest4.gcno
+        -:    0:Data:unittest4.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    0:Source is newer than graph
+        -:    1:/*************************************************************************************
+        -:    2: * CS362 Assignment 3
+        -:    3: * Name: Christina Curran
+        -:    4: * File: unittest1.c
+        -:    5: * **********************************************************************************/
+        -:    6:
+        -:    7:#include "dominion.h"
+        -:    8:#include "dominion_helpers.h"
+        -:    9:#include "rngs.h"
+        -:   10:#include <string.h>
+        -:   11:#include <stdio.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:#include <math.h>
+        -:   15:
+        -:   16://Unit testing: isGameOver
+        2:   17:void main (int argc, char** argv){
+        -:   18:
+        2:   19:	int i = 0;
+        -:   20:	struct gameState gm;
+        2:   21:	gm.coins = 0;
+        -:   22:
+        2:   23:	printf("\n**Unit Test 4: updateCoins**\n");
+        -:   24:
+        -:   25:	//gold
+        2:   26:	printf("T1: GOLD\n");
+       22:   27:	for(i=0; i<10; i++){
+       20:   28:		gm.hand[0][i] = gold;
+       20:   29:		//printf("%c", gm.hand[0][i]);
+        -:   30:	}
+        2:   31:	updateCoins(0, &gm, 0);
+        2:   32:	if (gm.coins == 30){
+    #####:   33:		printf("Gold coins %d/30: PASS\n", gm.coins);
+        -:   34:	}
+        -:   35:	else{
+        2:   36:		printf("Gold coins %d/30: FAIL\n", gm.coins);
+        -:   37:	}
+        -:   38:
+        -:   39:	//silver
+        2:   40:	printf("T2: SILVER\n");
+       22:   41:	for(i=0; i<10; i++){
+       20:   42:		gm.hand[0][i] = silver;
+        -:   43:	}
+        2:   44:	updateCoins(0, &gm, 0);
+        2:   45:	if (gm.coins == 20){
+    #####:   46:		printf("Silver coins %d/20: PASS\n", gm.coins);
+        -:   47:	}
+        -:   48:	else{
+        2:   49:		printf("Silver coins %d/20: FAIL\n", gm.coins);
+        -:   50:	}
+        -:   51:
+        -:   52:	//copper
+        2:   53:	printf("T3: COPPER\n");
+       22:   54:	for(i=0; i<10; i++){
+       20:   55:		gm.hand[0][i] = copper;
+        -:   56:	}
+        2:   57:	updateCoins(0, &gm, 0);
+        2:   58:	if (gm.coins == 10){
+    #####:   59:		printf("Copper coins %d/10: PASS\n", gm.coins);
+        -:   60:	}
+        -:   61:	else{
+        2:   62:		printf("Copper coins %d/10: FAIL\n", gm.coins);
+        -:   63:	}
+        -:   64:
+        -:   65:	//copper
+        2:   66:	printf("T4: COPPER BONUS\n");
+       22:   67:	for(i=0; i<10; i++){
+       20:   68:		gm.hand[0][i] = copper;
+        -:   69:	}
+        2:   70:	updateCoins(0, &gm, 1);
+        2:   71:	if (gm.coins == 11){
+    #####:   72:		printf("Copper coins + bonus  %d/11: PASS\n", gm.coins);
+        -:   73:	}
+        -:   74:	else{
+        2:   75:		printf("Copper coins + bonus %d/11: FAIL\n", gm.coins);
+        -:   76:	}
+        -:   77:
+        2:   78:	printf("**Unit Test 4: updateCoins complete**\n\n");
+        2:   79:}
