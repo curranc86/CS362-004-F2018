@@ -22,7 +22,7 @@ int main() {
 	assert(compare((void*)&A, (void*)&B) == 0, "Compare handled B equals A wrong");
 	assert(A == 3 && B == 3, "Compare modified A or B");
 
-	printf("Finished with Unit Test 2.\n");
+	printf("Unit Test 3: Finished\n");
 }
 /*
 int compare(const void* a, const void* b) {

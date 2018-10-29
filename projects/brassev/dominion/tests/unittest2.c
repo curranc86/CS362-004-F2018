@@ -37,5 +37,5 @@ int main() {
 	assert(fullDeckCount(0, smithy, &state) == 1, "Reported incorrect number of smithy");
 	assert(fullDeckCount(0, gardens, &state) == 1, "Reported incorrect number of gardens");
 
-	printf("Finished with Unit Test 2.\n");
+	printf("%s\n", "Unit Test 2: Finished");
 }

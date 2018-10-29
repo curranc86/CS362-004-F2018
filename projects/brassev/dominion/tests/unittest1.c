@@ -49,5 +49,5 @@ int main() {
 	};
 	assert(initializeGame(2, kingdomCards_Repeated, 1, &state) == -1, "Returned 0 for repeated kingdom cards");
 
-	printf("%s\n", "Finished with Unit Test 1...");
+	printf("%s\n", "Unit Test 1: Finished");
 }

@@ -22,7 +22,7 @@ int main() {
 	assert(test1[8] == treasure_map, "Didn't place treasure_map into the proper location");
 	assert(test1[9] == gold, "Didn't place gold into the proper location");
 
-	printf("Finished executing unit test 4.");
+	printf("Unit Test 4: Finished\n");
 }
 /*
 int* kingdomCards(int k1, int k2, int k3, int k4, int k5, int k6, int k7,

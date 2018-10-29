@@ -7,13 +7,26 @@ unit%: tests/unittest%.c dominion.c rngs.c
 unit%.out: unit%
 	$^ >> $@
 	gcov -b dominion.c >> $@
-	cat dominion.c.gcov >> $@
+#	cat dominion.c.gcov >> $@
 
-unittestresults: unit1.out unit2.out unit3.out unit4.out
+card%: tests/cardtest%.c dominion.c rngs.c
+	gcc -o $@ $^ $(CFLAGS)
+
+card%.out: card%
+	$^ >> $@
+	gcov -b dominion.c >> $@
+#	cat dominion.c.gcov >> $@
+
+unittestresults: unit1.out unit2.out unit3.out unit4.out card1.out card2.out card3.out card4.out
 	cat unit1.out >> unittestresults.out
 	cat unit2.out >> unittestresults.out
 	cat unit3.out >> unittestresults.out
 	cat unit4.out >> unittestresults.out
+
+	cat card1.out >> unittestresults.out
+	cat card2.out >> unittestresults.out
+	cat card3.out >> unittestresults.out
+	cat card4.out >> unittestresults.out
 #	@$(foreach unit, $^, cat $(unit) >> unittestresults.out)
 
 # Normal:
@@ -54,4 +67,4 @@ player: player.c interface.o
 all: playdom player 
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unit*
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unit* card*
