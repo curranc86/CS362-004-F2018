@@ -1,5 +1,15 @@
 CFLAGS= -Wall -fpic -coverage -lm -std=c99
 
+# Unit Tests:
+unit%: tests/unittest%.c dominion.c rngs.c
+	gcc -o $@ $^ $(CFLAGS)
+
+unittestresults: unit1 unit2
+	@$(foreach unit, $^, $(unit) >> $(unit).out && gcov dominion.c >> $(unit).out && cat dominion.c.gcov >> $(unit).out)
+	# unit2 >> unit.out && gcov dominion.c >> unit.out && cat dominion.c.gcov >> unit.out
+
+# Normal:
+
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
 
@@ -36,4 +46,4 @@ player: player.c interface.o
 all: playdom player 
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unit*
