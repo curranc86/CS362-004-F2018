@@ -1,12 +1,20 @@
 CFLAGS= -Wall -fpic -coverage -lm -std=c99
-
+.PHONY=unittestresults
 # Unit Tests:
 unit%: tests/unittest%.c dominion.c rngs.c
 	gcc -o $@ $^ $(CFLAGS)
 
-unittestresults: unit1 unit2
-	@$(foreach unit, $^, $(unit) >> $(unit).out && gcov dominion.c >> $(unit).out && cat dominion.c.gcov >> $(unit).out)
-	# unit2 >> unit.out && gcov dominion.c >> unit.out && cat dominion.c.gcov >> unit.out
+unit%.out: unit%
+	$^ >> $@
+	gcov -b dominion.c >> $@
+	cat dominion.c.gcov >> $@
+
+unittestresults: unit1.out unit2.out unit3.out unit4.out
+	cat unit1.out >> unittestresults.out
+	cat unit2.out >> unittestresults.out
+	cat unit3.out >> unittestresults.out
+	cat unit4.out >> unittestresults.out
+#	@$(foreach unit, $^, cat $(unit) >> unittestresults.out)
 
 # Normal:
 
