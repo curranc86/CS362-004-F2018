@@ -29,6 +29,10 @@ unittestresults: unit1.out unit2.out unit3.out unit4.out card1.out card2.out car
 	cat card4.out >> unittestresults.out
 #	@$(foreach unit, $^, cat $(unit) >> unittestresults.out)
 
+# Random Tests:
+randomtestcard%: tests/randomtestcard%.c dominion.c rngs.c
+	gcc -o $@ $^ $(CFLAGS)
+
 # Normal:
 
 rngs.o: rngs.h rngs.c
