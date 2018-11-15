@@ -76,15 +76,15 @@
         -:   71:		//first, we check that our hand after the test is +2 (only 2 beause
         -:   72:		//we have to discard 1 too)
       999:   73:		if (handTest != (handStart+2)){
-       40:   74:			printf("\nTEST FAIL: incorrect number of cards drawn\n");
-       40:   75:			failNum++;
-       40:   76:			fail = 1;
+       41:   74:			printf("\nTEST FAIL: incorrect number of cards drawn\n");
+       41:   75:			failNum++;
+       41:   76:			fail = 1;
         -:   77:		}
         -:   78:		//now check and make sure 3 were drawn from deck
       999:   79:		if (deckTest != (deckStart-3)){
-       40:   80:			printf("\nTEST FAIL: incorrect number of cards taken from deck\n");
-       40:   81:			failNum++;
-       40:   82:			fail = 1;
+       41:   80:			printf("\nTEST FAIL: incorrect number of cards taken from deck\n");
+       41:   81:			failNum++;
+       41:   82:			fail = 1;
         -:   83:		}
         -:   84:		/*now, verify that a card was discarded
         -:   85:		if (discardTest != (discardStart+1)){
@@ -93,8 +93,8 @@
         -:   88:			fail = 1;
         -:   89:		}*/
       999:   90:		if (fail == 0){
-        5:   91:			printf("\nTESTS PASSED\n");
-        5:   92:			passNum++;
+        6:   91:			printf("\nTESTS PASSED\n");
+        6:   92:			passNum++;
         -:   93:		}
         -:   94:	}
         -:   95:
