@@ -29,12 +29,17 @@ unittestresults: unit1.out unit2.out unit3.out unit4.out card1.out card2.out car
 	cat card4.out >> unittestresults.out
 #	@$(foreach unit, $^, cat $(unit) >> unittestresults.out)
 
+
 # Random Tests:
-randomtestcard%: tests/randomtestcard%.c dominion.c rngs.c
+randomtestcard%: tests/randomtestcard%.c dominion.c rngs.c tests/common.c
 	gcc -o $@ $^ $(CFLAGS)
 
-# Normal:
+randomtestcard%.out: randomtestcard%
+	$^ >> $@
+	gcov -b dominion.c >> $@
 
+
+# Normal:
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
 
@@ -71,4 +76,4 @@ player: player.c interface.o
 all: playdom player 
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unit* card*
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unit* card* random*

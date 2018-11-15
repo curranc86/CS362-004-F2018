@@ -24,12 +24,24 @@ void cardEffect_smithy(struct gameState* state, int currentPlayer, int handPos) 
 */
 
 void oracle(struct gameState * state, int currentPlayer, int handPos) {
-	++(state->playedCardCount);
+	// Draw Three cards
+	for (int _ = 0; _ < 3; ++_){
+		state->hand[currentPlayer][state->handCount[currentPlayer]++] = state->deck[currentPlayer][--(state->deckCount[currentPlayer])];
+	}
+	// Put the smithy card into the played cards
+	state->playedCards[state->playedCardCount++] = state->hand[currentPlayer][handPos];
+
+	// Discard the smithy card
+	state->hand[currentPlayer][handPos] = state->hand[currentPlayer][--(state->handCount[currentPlayer])];
+	state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
 }
 
+unsigned seed;
 
 int main() {
-	srand(time(NULL));
+	seed = time(NULL);
+//	seed = 5;	
+	srand(seed);
 
 	unsigned trials = 5000;
 
@@ -46,7 +58,7 @@ int main() {
 		oracle(&oracleState, oracleState.whoseTurn, handPos);
 		cardEffect_smithy(&state, state.whoseTurn, handPos);
 
-//		compareStates(&state, &oracleState);
+		compareStates(&state, &oracleState);
 
 		--trials;
 	}
@@ -112,7 +124,7 @@ void assert(int current, int expected, char * name) {
 	if (current != expected) {
 		printf("Assertion failed: %s should have been %i but was instead %i.\n", name, expected, current);
 		if (++totalErrors > 10) {
-			printf("Aborted due to 10 previous errors.\n");
+			printf("Aborted due to 10 previous errors.\n For reproduction purposes, this random seed was: %u\n", seed);
 			exit(5);
 		}
 	}
