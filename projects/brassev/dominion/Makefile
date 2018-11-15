@@ -1,5 +1,5 @@
 CFLAGS= -Wall -fpic -coverage -lm -std=c99 -g
-.PHONY=unittestresults
+.PHONY=unittestresults randomtestall *.out
 # Unit Tests:
 unit%: tests/unittest%.c dominion.c rngs.c
 	gcc -o $@ $^ $(CFLAGS)
@@ -7,7 +7,8 @@ unit%: tests/unittest%.c dominion.c rngs.c
 unit%.out: unit%
 	$^ >> $@
 	gcov -b dominion.c >> $@
-#	cat dominion.c.gcov >> $@
+	cat dominion.c.gcov >> $@
+	rm -f dominion.c.gcov
 
 card%: tests/cardtest%.c dominion.c rngs.c
 	gcc -o $@ $^ $(CFLAGS)
@@ -15,7 +16,8 @@ card%: tests/cardtest%.c dominion.c rngs.c
 card%.out: card%
 	$^ >> $@
 	gcov -b dominion.c >> $@
-#	cat dominion.c.gcov >> $@
+	cat dominion.c.gcov >> $@
+	rm -f dominion.c.gcov
 
 unittestresults: unit1.out unit2.out unit3.out unit4.out card1.out card2.out card3.out card4.out
 	cat unit1.out >> unittestresults.out
@@ -31,12 +33,19 @@ unittestresults: unit1.out unit2.out unit3.out unit4.out card1.out card2.out car
 
 
 # Random Tests:
-randomtestcard%: tests/randomtestcard%.c dominion.c rngs.c tests/common.c
+randomtest%: tests/randomtest%.c dominion.c rngs.c tests/common.c
 	gcc -o $@ $^ $(CFLAGS)
 
-randomtestcard%.out: randomtestcard%
+randomtest%.out: randomtest%
 	$^ >> $@
 	gcov -b dominion.c >> $@
+	cat dominion.c.gcov >> $@
+	rm -f dominion.c.gcov
+
+randomtestall: randomtestcard1.out randomtestcard2.out randomtestadventurer.out
+	cat randomtestcard1.out >> randomtestall.out
+	cat randomtestcard2.out >> randomtestall.out
+	cat randomtestadventurer.out >> randomtestall.out
 
 
 # Normal:
