@@ -7,6 +7,7 @@
 void compareStates(struct gameState * test, struct gameState * expected);
 void assert(int current, int expected, char * name);
 void fillGameStateRandom(struct gameState * state);
+int randInt(int min, int max);
 
 void cardEffect_smithy(struct gameState* state, int currentPlayer, int handPos);
 /*
@@ -23,21 +24,21 @@ void cardEffect_smithy(struct gameState* state, int currentPlayer, int handPos) 
 */
 
 void oracle(struct gameState * state, int currentPlayer, int handPos) {
-
+	++(state->playedCardCount);
 }
 
 
 int main() {
 	srand(time(NULL));
 
-	const unsigned trials = 5000;
+	unsigned trials = 5000;
 
 	while (trials > 0) {
 		struct gameState state = { 0 };
 		struct gameState oracleState = { 0 };
 
 		fillGameStateRandom(&state);
-		int handPos = rand(0, state.handCount[state.whoseTurn]);
+		int handPos = randInt(0, state.handCount[state.whoseTurn]);
 		state.hand[state.whoseTurn][handPos] = smithy; // Make sure that the card currently in our hand 
 
 		memcpy(&oracleState, &state, sizeof(struct gameState));
@@ -45,7 +46,7 @@ int main() {
 		oracle(&oracleState, oracleState.whoseTurn, handPos);
 		cardEffect_smithy(&state, state.whoseTurn, handPos);
 
-		compareStates(state, oracleState);
+//		compareStates(&state, &oracleState);
 
 		--trials;
 	}
@@ -107,8 +108,13 @@ void fillGameStateRandom(struct gameState * state) {
 }
 
 void assert(int current, int expected, char * name) {
+	static unsigned totalErrors = 0;
 	if (current != expected) {
-		printf("Assertion failed: %s should have been %i but was instead %i.", name, expected, current);
+		printf("Assertion failed: %s should have been %i but was instead %i.\n", name, expected, current);
+		if (++totalErrors > 10) {
+			printf("Aborted due to 10 previous errors.\n");
+			exit(5);
+		}
 	}
 }
 

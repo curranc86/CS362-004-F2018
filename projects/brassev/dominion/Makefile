@@ -1,4 +1,4 @@
-CFLAGS= -Wall -fpic -coverage -lm -std=c99
+CFLAGS= -Wall -fpic -coverage -lm -std=c99 -g
 .PHONY=unittestresults
 # Unit Tests:
 unit%: tests/unittest%.c dominion.c rngs.c
