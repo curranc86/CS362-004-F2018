@@ -1,5 +1,7 @@
 #include "../dominion.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <memory.h>
 
 void compareStates(struct gameState * test, struct gameState * expected);
