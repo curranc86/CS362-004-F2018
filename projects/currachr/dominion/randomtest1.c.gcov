@@ -1,0 +1,112 @@
+        -:    0:Source:randomtest1.c
+        -:    0:Graph:randomtest1.gcno
+        -:    0:Data:randomtest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/*************************************************************************************
+        -:    2: * CS362 Assignment 4
+        -:    3: * Name: Christina Curran
+        -:    4: * File: randomtest1.c (for great hall)
+        -:    5: * **********************************************************************************/
+        -:    6:#include <string.h>
+        -:    7:#include <stdlib.h>
+        -:    8:#include <stdio.h>
+        -:    9:#include <assert.h>
+        -:   10:#include <time.h>
+        -:   11:#include "dominion.h"
+        -:   12:#include "dominion_helpers.h"
+        -:   13:#include "rngs.h"
+        -:   14:#include "interface.h"
+        -:   15:
+        1:   16:int main(){
+        -:   17:
+        -:   18:	int i;			//iterators
+        1:   19:	int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        -:   20:	struct gameState G;
+        1:   21:	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse, sea_hag,
+        -:   22:		     tribute, smithy, council_room};
+        1:   23:	int numPlayers = 2;
+        1:   24:	int currentPlayer = 0;		//setting to 0 to start with player 1
+        1:   25:	int seed = 1000;
+        -:   26:	int deckSize;
+        -:   27:	int handSize;
+        -:   28:	int actionStart;
+        -:   29:	int actionTest;
+        -:   30:	int handStart;
+        -:   31:	int handTest;
+        -:   32:	int deckStart;
+        -:   33:	int deckTest;
+        -:   34:	int discardStart;
+        -:   35:	int discardTest;
+        1:   36:	int fail = 0;
+        1:   37:	int failNum = 0;
+        1:   38:	int passNum = 0;
+        -:   39:
+        -:   40:	//seed randomizaiton based on time
+        1:   41:	srand(time(NULL));
+        -:   42:	
+        -:   43:	//run many, many random game tests to try and show how valid tests are
+    10000:   44:	for (i=0; i<9999; i++){
+     9999:   45:		initializeGame(numPlayers, k, seed, &G);
+        -:   46:		//randomize deck size and hand size
+     9999:   47:		deckSize = rand() % (MAX_DECK+1);	//add 1 to ensure not 0
+     9999:   48:		handSize = rand() % (deckSize+1);	//add 1 to ensure not 0
+        -:   49:
+        -:   50:		//set up randomization of cards in deck
+        -:   51:		//reference = dominion.c
+     9999:   52:		G.deckCount[0] = deckSize-handSize;
+     9999:   53:		G.handCount[0] = handSize;
+        -:   54:
+        -:   55:		//get deck, hand, and discards before smithy 
+     9999:   56:		deckStart = G.deckCount[0];
+     9999:   57:		handStart = G.handCount[0];
+     9999:   58:		discardStart = G.playedCardCount;
+     9999:   59:		actionStart = G.numActions;
+        -:   60:
+        -:   61:		//run great hall card to test
+     9999:   62:		cardEffect(great_hall, choice1, choice2, choice3, &G, handPos, &bonus);
+        -:   63:
+        -:   64:		//after running adventurer card, test number of coins
+     9999:   65:		deckTest = G.deckCount[0];
+     9999:   66:		handTest = G.handCount[0];
+     9999:   67:		discardTest = G.playedCardCount;
+     9999:   68:		actionStart = G.numActions;
+        -:   69:
+        -:   70:		//now, check for pass fail of test
+        -:   71:		//first, we check that our hand after the test is the same; discarded
+        -:   72:		//one and drew 1
+     9999:   73:		if (handTest != handStart){
+      133:   74:			printf("\nTEST FAIL: incorrect number of cards drawn\n");
+      133:   75:			failNum++;
+      133:   76:			fail = 1;
+        -:   77:		}
+        -:   78:		//now check and make sure 1 were drawn from deck
+     9999:   79:		if (deckTest != (deckStart-1)){
+      133:   80:			printf("\nTEST FAIL: incorrect number of cards taken from deck\n");
+      133:   81:			failNum++;
+      133:   82:			fail = 1;
+        -:   83:		}
+        -:   84:		//now, verify that a card was discarded
+     9999:   85:		if (discardTest != (discardStart+1)){
+    #####:   86:			printf("\nTEST FAIL: incorrect number of cards discarded\n");
+    #####:   87:			failNum++;
+    #####:   88:			fail = 1;
+        -:   89:		}
+        -:   90:		//last, we check that our action went up 1
+     9999:   91:		if (actionTest != (actionStart+1)){
+     9999:   92:			printf("\nTEST FAIL: incorrect number of cards added\n");
+     9999:   93:			failNum++;
+     9999:   94:			fail = 1;
+        -:   95:		}
+     9999:   96:		if (fail == 0){
+    #####:   97:			printf("\nTESTS PASSED\n");
+    #####:   98:			passNum++;
+        -:   99:		}
+        -:  100:	}
+        -:  101:
+        -:  102:	//output number of passes and fails
+        1:  103:	printf("\nTests PASSED: %d\n", passNum);
+        1:  104:	printf("\nTests FAILED: %d\n", failNum);
+        -:  105:
+        1:  106:	return 0;
+        -:  107:}

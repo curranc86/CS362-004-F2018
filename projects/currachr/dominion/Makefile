@@ -98,6 +98,27 @@ cardtest4: cardtest4.c dominion.o
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
+#randomtestadventurer: randomtestadventurer.c dominion.o
+#	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	
+randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
+	gcc -o randomtestadventurer dominion.c rngs.c randomtestadventurer.c $(CFLAGS)
+	./randomtestadventurer >> randomtestadventurer.out
+	gcov randomtestadventurer >> randomtestadventurer.out
+	#randomtestadventurer >> randomtestadventurer.out
+
+randomtest1: randomtest1.c dominion.o rngs.o
+	gcc -o randomtest1 dominion.c rngs.c randomtest1.c $(CFLAGS)
+	./randomtest1 >> randomtest1.out
+	gcov randomtest1 >> randomtest1.out
+
+
+randomtest2: randomtest2.c dominion.o rngs.o
+	gcc -o randomtest2 dominion.c rngs.c randomtest2.c $(CFLAGS)
+	./randomtest2 >> randomtest2.out
+	gcov randomtest2 >> randomtest2.out
+
+
 all: playdom player 
 
 clean:
