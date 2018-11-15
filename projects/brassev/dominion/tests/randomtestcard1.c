@@ -8,6 +8,7 @@ void compareStates(struct gameState * test, struct gameState * expected);
 void assert(int current, int expected, char * name);
 void fillGameStateRandom(struct gameState * state);
 
+void cardEffect_smithy(struct gameState* state, int currentPlayer, int handPos);
 /*
 void cardEffect_smithy(struct gameState* state, int currentPlayer, int handPos) {
 	//+3 Cards
