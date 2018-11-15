@@ -63,7 +63,7 @@
       999:   58:		discardStart = G.playedCardCount;
         -:   59:
         -:   60:
-        -:   61:		//run adventurer card to test
+        -:   61:		//run smithy  card to test
       999:   62:		refactorSmithy(&G, handPos);
         -:   63:
         -:   64:		//after running adventurer card, test number of coins
@@ -76,25 +76,25 @@
         -:   71:		//first, we check that our hand after the test is +2 (only 2 beause
         -:   72:		//we have to discard 1 too)
       999:   73:		if (handTest != (handStart+2)){
-       31:   74:			printf("\nTEST FAIL: incorrect number of cards drawn\n");
-       31:   75:			failNum++;
-       31:   76:			fail = 1;
+       40:   74:			printf("\nTEST FAIL: incorrect number of cards drawn\n");
+       40:   75:			failNum++;
+       40:   76:			fail = 1;
         -:   77:		}
         -:   78:		//now check and make sure 3 were drawn from deck
       999:   79:		if (deckTest != (deckStart-3)){
-       31:   80:			printf("\nTEST FAIL: incorrect number of cards taken from deck\n");
-       31:   81:			failNum++;
-       31:   82:			fail = 1;
+       40:   80:			printf("\nTEST FAIL: incorrect number of cards taken from deck\n");
+       40:   81:			failNum++;
+       40:   82:			fail = 1;
         -:   83:		}
-        -:   84:		//now, verify that a card was discarded
-      999:   85:		if (discardTest != (discardStart+1)){
-    #####:   86:			printf("\nTEST FAIL: incorrect number of cards discarded\n");
-    #####:   87:			failNum++;
-    #####:   88:			fail = 1;
-        -:   89:		}
+        -:   84:		/*now, verify that a card was discarded
+        -:   85:		if (discardTest != (discardStart+1)){
+        -:   86:			printf("\nTEST FAIL: incorrect number of cards discarded\n");
+        -:   87:			failNum++;
+        -:   88:			fail = 1;
+        -:   89:		}*/
       999:   90:		if (fail == 0){
-       23:   91:			printf("\nTESTS PASSED\n");
-       23:   92:			passNum++;
+        5:   91:			printf("\nTESTS PASSED\n");
+        5:   92:			passNum++;
         -:   93:		}
         -:   94:	}
         -:   95:
