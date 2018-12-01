@@ -1,0 +1,374 @@
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+Tests PASSED: 24
+
+Tests FAILED: 60
+File 'randomtest2.c'
+Lines executed:100.00% of 38
+Creating 'randomtest2.c.gcov'
+
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TESTS PASSED
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+TEST FAIL: incorrect number of cards drawn
+
+TEST FAIL: incorrect number of cards taken from deck
+
+Tests PASSED: 11
+
+Tests FAILED: 84
+File 'randomtest2.c'
+Lines executed:100.00% of 37
+Creating 'randomtest2.c.gcov'
+

@@ -1,0 +1,138 @@
+        -:    0:Source:randomtestadventurer.c
+        -:    0:Graph:randomtestadventurer.gcno
+        -:    0:Data:randomtestadventurer.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:/*************************************************************************************
+        -:    2: * CS362 Assignment 4
+        -:    3: * Name: Christina Curran
+        -:    4: * File: randomtesadventurer.c
+        -:    5: * **********************************************************************************/
+        -:    6:#include <string.h>
+        -:    7:#include <stdlib.h>
+        -:    8:#include <stdio.h>
+        -:    9:#include <assert.h>
+        -:   10:#include <time.h>
+        -:   11:#include "dominion.h"
+        -:   12:#include "dominion_helpers.h"
+        -:   13:#include "rngs.h"
+        -:   14:#include "interface.h"
+        -:   15:
+        2:   16:int main(){
+        -:   17:
+        -:   18:	int i, j, h, g, c;			//iterators
+        -:   19:	struct gameState G;
+        2:   20:	int k[10] = {adventurer, embargo, village, minion, mine, cutpurse, sea_hag,
+        -:   21:		     tribute, smithy, council_room};
+        2:   22:	int numPlayers = 2;
+        2:   23:	int currentPlayer = 0;		//setting to 0 to start with player 1
+        2:   24:	int seed = 1000;
+        -:   25:	int deckSize;
+        -:   26:	int hand;
+        -:   27:	int handSize;
+        -:   28:	int randCard;
+        -:   29:	int randKingdom;
+        -:   30:	int coin;
+        -:   31:	int coinTest;
+        -:   32:	int coinDiscard;
+        2:   33:	int fail = 0;
+        -:   34:	int failNum;
+        -:   35:	int passNum;
+        -:   36:
+        -:   37:	//seed randomizaiton based on time
+        2:   38:	srand(time(NULL));
+        -:   39:	
+        -:   40:	//get number of players
+        -:   41:	//numPlayers = rand() % 50;
+        -:   42:
+        -:   43:	//run many, many random game tests to try and show how valid tests are
+     2000:   44:	for (i=0; i<999; i++){
+     1998:   45:		initializeGame(numPlayers, k, seed, &G);
+        -:   46:		//randomize deck size and hand size
+     1998:   47:		deckSize = rand() % (MAX_DECK+1);	//add 1 to ensure not 0
+     1998:   48:		handSize = rand() % (deckSize+1);	//add 1 to ensure not 0
+        -:   49:
+        -:   50:		//set up randomization of cards in deck
+        -:   51:		//reference = dominion.c
+     1998:   52:		G.deckCount[0] = deckSize-handSize;
+     1998:   53:		G.handCount[0] = handSize;
+     5994:   54:		for (h=0; h < numPlayers; h++){
+    11892:   55:			for (j=0; j < G.deckCount[j]; j++){
+     7896:   56:				randCard = rand()% 50;
+     7896:   57:				randKingdom = rand() % 10; 
+     7896:   58:				if (randCard == 0){
+      168:   59:					G.deck[h][j] = copper;
+        -:   60:				}
+     7728:   61:				else if (randCard == 1){
+      170:   62:					G.deck[h][j] = silver;
+        -:   63:				}
+     7558:   64:				else if (randCard == 2){
+      166:   65:					G.deck[h][j] = gold;
+        -:   66:				}
+        -:   67:				else {
+     7392:   68:					G.deck[h][j] = k[randKingdom];
+        -:   69:				}
+        -:   70:			}
+        -:   71:		}
+        -:   72:
+        -:   73:		//count coins in player's hand; drawn in initializeGame
+   254760:   74:		for (g=0; g<G.handCount[currentPlayer]; g++){
+   299141:   75:			if (G.hand[currentPlayer][g] == copper ||
+    92483:   76:			    G.hand[currentPlayer][g] == silver ||
+    46104:   77:			    G.hand[currentPlayer][g] == gold){
+   206737:   78:				coin++;
+        -:   79:			} 
+        -:   80:		}
+        -:   81:
+        -:   82:		//run adventurer card to test
+     1998:   83:		cardEffect_adventurer(&G, currentPlayer);
+        -:   84:		//after running adventurer card, test number of coins
+     1998:   85:		coinTest = 0;
+   258520:   86:		for (g=0; g<G.handCount[currentPlayer]; g++){
+   302835:   87:			if (G.hand[currentPlayer][g] == copper ||
+    92347:   88:			    G.hand[currentPlayer][g] == silver ||
+    46034:   89:			    G.hand[currentPlayer][g] == gold){
+   210568:   90:				coinTest++;
+        -:   91:			} 
+        -:   92:		}
+        -:   93:
+        -:   94:		//check discard pile for any coins
+     1998:   95:		coinDiscard = 0;
+   243411:   96:		for (c=0; c < G.discardCount[currentPlayer]; c++){
+   482826:   97:			if (G.discard[currentPlayer][c] == copper ||
+   482826:   98:			    G.discard[currentPlayer][c] == silver ||
+   241413:   99:			    G.discard[currentPlayer][c] == gold){
+    #####:  100:				coinDiscard++;
+        -:  101:			} 
+        -:  102:		}
+        -:  103:
+        -:  104:		//now, check for pass fail of test
+        -:  105:		//first, verify whether coin count is correct; should be 2+ coin
+        -:  106:		//after adventurer card, then make sure no coins discarded
+     1998:  107:		if (coinTest < coin){
+     1998:  108:			printf ("\nTEST FAIL: not enough treasure drawn\n");
+     1998:  109:			failNum++;
+     1998:  110:			fail = 1;
+        -:  111:		}
+     1998:  112:		if (coinTest > (coin+2)){
+    #####:  113:			printf("\nTEST FAIL: too many treasure cards drawn\n");
+    #####:  114:			failNum++;
+    #####:  115:			fail = 1;
+        -:  116:		}
+     1998:  117:		if (coinDiscard != 0){
+    #####:  118:			printf("\nTEST FAIL: copper, silver, or gold was discarded\n");
+    #####:  119:			failNum++;
+    #####:  120:			fail = 1;
+        -:  121:		}
+     1998:  122:		if (fail == 0){
+    #####:  123:			printf("\nTESTS PASSED\n");
+    #####:  124:			passNum++;
+        -:  125:		}
+        -:  126:	}
+        -:  127:
+        -:  128:	//output number of passes and fails
+        2:  129:	printf("\nTests PASSED: %d\n", passNum);
+        2:  130:	printf("\nTests FAILED: %d\n", failNum);
+        -:  131:
+        2:  132:	return 0;
+        -:  133:}

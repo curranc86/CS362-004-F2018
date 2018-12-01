@@ -1,0 +1,109 @@
+        -:    0:Source:cardtest2.c
+        -:    0:Graph:cardtest2.gcno
+        -:    0:Data:cardtest2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    0:Source is newer than graph
+        -:    1:/*************************************************************************************
+        -:    2: * CS362 Assignment 3
+        -:    3: * Name: Christina Curran
+        -:    4: * File: cardtest3.c
+        -:    5: * **********************************************************************************/
+        -:    6:
+        -:    7:#include "dominion.h"
+        -:    8:#include "dominion_helpers.h"
+        -:    9:#include "rngs.h"
+        -:   10:#include <string.h>
+        -:   11:#include <stdio.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:
+        -:   15://Adventurer card test
+        1:   16:void main(){
+        -:   17:	
+        1:   18:	int numPlayers = 2;
+        1:   19:	int seed = 1000;
+        1:   20:	int handPos = 0;
+        -:   21:	//initialize game, as done in playdom.c and add test game
+        -:   22:	struct gameState gm,test;
+        1:   23:	int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
+        -:   24:		     sea_hag, tribute, smithy};
+        1:   25:	int player = 0;
+        -:   26:	int i;			//iterator
+        -:   27:	int smithCount1;
+        -:   28:	int smithCount2;
+        -:   29:	
+        -:   30:	//starting a game and cards
+        1:   31:	initializeGame (numPlayers, k, seed, &gm);	
+        -:   32:
+        1:   33:	printf("\n**Testing Smithy card**\n");
+        -:   34:
+        -:   35:	//copy current game into a test game variable for comparison
+        1:   36:	memcpy(&test, &gm, sizeof(struct gameState));
+        -:   37:	//test Smithy card
+        1:   38:	cardEffect_smithy(&gm, player, handPos);
+        -:   39:
+        1:   40:	player = whoseTurn(&test);
+        -:   41:
+        -:   42:	//check player hand count
+        1:   43:	if(test.handCount[player]+2 == gm.handCount[player]){
+        1:   44:		printf ("Player Hand Count: PASS\n");
+        -:   45:	}
+        -:   46:	else{
+    #####:   47:		printf ("Player Hand Count: FAIL\n");
+    #####:   48:		printf("Expected: %d\n", test.handCount[player]+2);
+    #####:   49:		printf("Actual: %d\n", gm.handCount[player]);
+        -:   50:}
+        -:   51:
+        -:   52:	//check player's hand
+        1:   53:	if(gm.hand[player][test.handCount[player]] != -1){
+        1:   54:		printf ("Card added to player's hand: PASS\n");
+        -:   55:	}
+        -:   56:	else{
+    #####:   57:		printf ("Card added to player's hand: FAIL\n");
+    #####:   58:		printf("Expected: %d\n", (test.discardCount[player]-1));
+    #####:   59:		printf("Actual: %d\n", gm.discardCount[player]);
+        -:   60:}
+        -:   61:
+        -:   62:	//check Smithy card count in hand
+        8:   63:	for (i=0; i<gm.handCount[0]; i++){
+        7:   64:		if(gm.hand[0][i] == smithy){
+    #####:   65:			smithCount1++;
+        -:   66:		}
+        -:   67:	}
+        6:   68:	for (i=0; i<test.handCount[0]; i++){
+        5:   69:		if (test.hand[0][i] == smithy){
+    #####:   70:			smithCount2++;
+        -:   71:		}
+        -:   72:	}
+        1:   73:	if (smithCount1 == smithCount2-1){
+    #####:   74:		printf("Smithy cards in hand: PASS\n");
+        -:   75:	}
+        -:   76:	else{
+        1:   77:		printf("Smithy cards in hand: FAIL\n");
+        1:   78:		printf("Expected: %d\n", smithCount2-1);
+        1:   79:		printf("Actual: %d\n", smithCount1);
+        -:   80:}
+        -:   81:
+        -:   82:	//check if player played a card
+        1:   83:	if(test.playedCardCount+1 == gm.playedCardCount){
+        1:   84:		printf("Played Smithy card: PASS\n");
+        -:   85:	}
+        -:   86:	else{
+    #####:   87:		printf("Played Smithy card: FAIL\n");
+    #####:   88:		printf("Expected: %d\n", test.playedCardCount+1);
+    #####:   89:		printf("Actual: %d\n", gm.playedCardCount);
+        -:   90:}
+        -:   91:
+        -:   92:	//check if card discarded
+        1:   93:	if(test.discardCount[player] == gm.discardCount[player]){
+        1:   94:		printf("Smithy card discarded: PASS\n");
+        -:   95:	}
+        -:   96:	else{
+    #####:   97:		printf("Smithy card discarded: FAIL\n");
+    #####:   98:		printf("Expected: %d\n", test.discardCount[player]);
+    #####:   99:		printf("Actual: %d\n", gm.discardCount[player]);
+        -:  100:}
+        -:  101:
+        1:  102:	printf("**Smithy card testing complete**\n\n");
+        1:  103:}

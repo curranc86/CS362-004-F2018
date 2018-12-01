@@ -1,0 +1,129 @@
+        -:    0:Source:cardtest1.c
+        -:    0:Graph:cardtest1.gcno
+        -:    0:Data:cardtest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/*************************************************************************************
+        -:    2: * CS362 Assignment 3
+        -:    3: * Name: Christina Curran
+        -:    4: * File: cardtest1.c
+        -:    5: * **********************************************************************************/
+        -:    6:
+        -:    7:#include "dominion.h"
+        -:    8:#include "dominion_helpers.h"
+        -:    9:#include "rngs.h"
+        -:   10:#include <string.h>
+        -:   11:#include <stdio.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:
+        -:   15://Adventurer card test
+        1:   16:void main(){
+        -:   17:	
+        1:   18:	int numPlayers = 2;
+        1:   19:	int seed = 1000;
+        -:   20:	//initialize game, as done in playdom.c and add test game
+        -:   21:	struct gameState gm,test;
+        1:   22:	int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
+        -:   23:		     sea_hag, tribute, smithy};
+        1:   24:	int player = 0;
+        -:   25:	int i;			//iterator
+        -:   26:	int advenCount1;
+        -:   27:	int advenCount2;
+        -:   28:	
+        -:   29:	//starting a game and cards
+        1:   30:	initializeGame (numPlayers, k, seed, &gm);	
+        -:   31:
+        1:   32:	printf("\n**Testing Adventurer card**\n");
+        -:   33:
+        -:   34:	//copy current game into a test game variable for comparison
+        1:   35:	memcpy(&test, &gm, sizeof(struct gameState));
+        -:   36:	//test adventurer card
+        1:   37:	cardEffect_adventurer(&gm, player);
+        -:   38:
+        1:   39:	player = whoseTurn(&test);
+        -:   40:
+        -:   41:	//Check Deck Coount
+        1:   42:	if (test.deckCount[player] == gm.deckCount[player]){
+    #####:   43:		printf("Deck count: PASS\n");
+        -:   44:	}
+        -:   45:	else{
+        1:   46:		printf("Deck count: FAIL\n");
+        1:   47:		printf("Expected: %d\n", test.deckCount[player]);
+        1:   48:		printf("Actual: %d\n", gm.deckCount[player]);
+        -:   49:	}
+        -:   50:
+        -:   51:	//check player hand count
+        1:   52:	if(test.handCount[player]-1 == gm.handCount[player]){
+    #####:   53:		printf ("Player Hand Count: PASS\n");
+        -:   54:	}
+        -:   55:	else{
+        1:   56:		printf ("Player Hand Count: FAIL\n");
+        1:   57:		printf("Expected: %d\n", test.handCount[player]);
+        1:   58:		printf("Actual: %d\n", gm.handCount[player]);
+        -:   59:	}
+        -:   60:
+        -:   61:	//check player's hand
+        1:   62:	if(gm.hand[player][test.handCount[player]] != 1){
+        1:   63:		printf ("Card added to player's hand: PASS\n");
+        -:   64:	}
+        -:   65:	else{
+    #####:   66:		printf ("Card added to player's hand: FAIL\n");
+    #####:   67:		printf("Expected: %d\n", test.discardCount[player]);
+    #####:   68:		printf("Actual: %d\n", gm.discardCount[player]);
+        -:   69:	}
+        -:   70:
+        -:   71:	//check Adventurer card count in hand
+        8:   72:	for (i=0; i<gm.handCount[0]; i++){
+        7:   73:		if(gm.hand[0][i] = adventurer){
+        7:   74:			advenCount1++;
+        -:   75:		}
+        -:   76:	}
+        6:   77:	for (i=0; i<test.handCount[0]; i++){
+        5:   78:		if (test.hand[0][i] = adventurer){
+        5:   79:			advenCount2++;
+        -:   80:		}
+        -:   81:	}
+        1:   82:	if (advenCount1 == (advenCount2-1)){
+    #####:   83:		printf("Adventurer cards in hand: PASS\n");
+        -:   84:	}
+        -:   85:	else{
+        1:   86:		printf("Adventurer cards in hand: FAIL\n");
+        1:   87:		printf("Expected: %d\n", advenCount2-1);
+        1:   88:		printf("Actual: %d\n", advenCount1);
+        -:   89:	}
+        -:   90:
+        -:   91:	//check if player played a card
+        1:   92:	if((test.playedCardCount+1) == gm.playedCardCount){
+    #####:   93:		printf("Played Adventurer card: PASS\n");
+        -:   94:	}
+        -:   95:	else{
+        1:   96:		printf("Played Adventurer card: FAIL\n");
+        1:   97:		printf("Expected: %d\n", test.playedCardCount+1);
+        1:   98:		printf("Actual: %d\n", gm.playedCardCount);
+        -:   99:	}
+        -:  100:
+        -:  101:	//Check if Adventurer action added
+        1:  102:	if((test.numActions+2) == gm.numActions){
+    #####:  103:		printf("Actions added: PASS\n");
+        -:  104:	}
+        -:  105:	else{
+        1:  106:		printf("Actions added: FAIL\n");
+        1:  107:		printf("Expected: %d\n", test.numActions+2);
+        1:  108:		printf("Actual: %d\n", gm.numActions);
+        -:  109:
+        -:  110:	}
+        -:  111:
+        -:  112:	//check if card discarded
+        1:  113:	if((test.discardCount[player]-1) == gm.discardCount[player]){
+    #####:  114:		printf("Adventurer card discarded: PASS\n");
+        -:  115:	}
+        -:  116:	else{
+        1:  117:		printf("Adventurer card discarded: FAIL\n");
+        1:  118:		printf("Expected: %d\n", (test.discardCount[player]-1));
+        1:  119:		printf("Actual: %d\n", gm.discardCount[player]);
+        -:  120:		
+        -:  121:	}
+        -:  122:
+        1:  123:	printf("**Adventurer card testing complete**\n\n");
+        1:  124:}

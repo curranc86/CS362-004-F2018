@@ -1,0 +1,64 @@
+        -:    0:Source:cardtest4.c
+        -:    0:Graph:cardtest4.gcno
+        -:    0:Data:cardtest4.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/*************************************************************************************
+        -:    2: * CS362 Assignment 3
+        -:    3: * Name: Christina Curran
+        -:    4: * File: cardtest4.c
+        -:    5: * **********************************************************************************/
+        -:    6:
+        -:    7:#include "dominion.h"
+        -:    8:#include "dominion_helpers.h"
+        -:    9:#include "rngs.h"
+        -:   10:#include <string.h>
+        -:   11:#include <stdio.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:
+        -:   15://Sea Hag card test
+        1:   16:void main(){
+        -:   17:	
+        1:   18:	int numPlayers = 2;
+        1:   19:	int seed = 1000;
+        -:   20:	//initialize game, as done in playdom.c and add test game
+        -:   21:	struct gameState gm,test;
+        1:   22:	int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
+        -:   23:		     sea_hag, tribute, smithy};
+        1:   24:	int handPos = 0;
+        1:   25:	int choice1 = 0;
+        1:   26:	int choice2 = 0;
+        1:   27:	int choice3 = 0;
+        1:   28:	int bonus = 0;
+        1:   29:	int player = 0;
+        -:   30:	
+        -:   31:	//starting a game and cards
+        1:   32:	initializeGame (numPlayers, k, seed, &gm);	
+        -:   33:
+        1:   34:	printf("\n**Testing Sea Hag card**\n");
+        -:   35:
+        -:   36:	//copy current game into a test game variable for comparison
+        1:   37:	memcpy(&test, &gm, sizeof(struct gameState));
+        -:   38:	//test Village card
+        1:   39:	cardEffect(sea_hag, choice1, choice2, choice3, &gm, handPos, &bonus);
+        1:   40:	player = whoseTurn(&test);
+        -:   41:
+        -:   42:	//check player hand count
+        1:   43:	if(test.handCount[player] == gm.handCount[player]){
+        1:   44:		printf ("Player Hand Count: PASS\n");
+        -:   45:	}
+        -:   46:	else{
+    #####:   47:		printf ("Player Hand Count: FAIL\n");
+        -:   48:	}
+        -:   49:
+        -:   50:	//check if card discarded
+        1:   51:	if(test.discardCount[player] == gm.discardCount[player]){
+        1:   52:		printf("Village card discarded: PASS\n");
+        -:   53:	}
+        -:   54:	else{
+    #####:   55:		printf("Village card discarded: FAIL\n");
+        -:   56:	}
+        -:   57:
+        1:   58:	printf("**Sea Hag card testing complete**\n\n");
+        1:   59:}

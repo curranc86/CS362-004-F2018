@@ -1,0 +1,60 @@
+        -:    0:Source:unittest1.c
+        -:    0:Graph:unittest1.gcno
+        -:    0:Data:unittest1.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:/*************************************************************************************
+        -:    2: * CS362 Assignment 3
+        -:    3: * Name: Christina Curran
+        -:    4: * File: unittest1.c
+        -:    5: * **********************************************************************************/
+        -:    6:
+        -:    7:#include "dominion.h"
+        -:    8:#include "dominion_helpers.h"
+        -:    9:#include "rngs.h"
+        -:   10:#include <string.h>
+        -:   11:#include <stdio.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:#include <math.h>
+        -:   15:
+        -:   16://Unit testing: buyCard
+        2:   17:void main (int argc, char** argv){
+        -:   18:	
+        -:   19:	struct gameState gm;
+        2:   20:	gm.numBuys = 2;
+        2:   21:	gm.coins = 2;
+        -:   22:	
+        2:   23:	printf("\n**Unit Test 1: buyCard**\n");
+        -:   24:
+        2:   25:	printf("T1: Insufficient coins to buy card\n");
+        2:   26:	int t = buyCard(2, &gm);
+        2:   27:	if (t == -1){
+        2:   28:		printf("PASS: unable to buy card\n");
+        -:   29:	}
+        -:   30:	else{
+    #####:   31:		printf("FAIL\n");
+        -:   32:	}
+        -:   33:
+        2:   34:	printf("T2: Sufficient coins to buy card\n");
+        2:   35:	gm.coins = 10;
+        2:   36:	t = buyCard(2, &gm);
+        2:   37:	if (t == 0){
+    #####:   38:		printf("PASS: able to buy card\n");
+        -:   39:	}
+        -:   40:	else{
+        2:   41:		printf("FAIL\n");
+        -:   42:	}
+        -:   43:
+        2:   44:	printf("T3: Sufficient coins to buy card but no buys left\n");
+        2:   45:	gm.numBuys = 0;
+        2:   46:	t = buyCard(2, &gm);
+        2:   47:	if (t == -1){
+        2:   48:		printf("PASS: unable to buy card; no more buys\n");
+        -:   49:	}
+        -:   50:	else{
+    #####:   51:		printf("FAIL\n");
+        -:   52:	}
+        -:   53:	
+        2:   54:	printf("**Unit Test 1: buyCard complete**\n\n");
+        2:   55:}
